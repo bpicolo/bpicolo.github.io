@@ -32,7 +32,8 @@ Unfortunately, the default postgres container makes it a bit hard. If you take
 a look at the [postgres 9.5 dockerfile][default-dockerfile] you can see that it
 does all of it's database initializing logic on container startup, rather than
 in the docker commands. Luckily, it's easy to run that set of commands in the
-docker build instead. (At least, I haven't found a good reason why not to).
+docker build instead. (At least, I haven't found a good reason why not to, and I've
+found quite a few good reasons to definitely do it).
 
 [This github repo][example] provides a simple example for doing just this. If you
 use a migration tool for your database, or something similar, it should also be doable,
