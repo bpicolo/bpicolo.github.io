@@ -60,7 +60,8 @@ postgres-# \d
 {% endhighlight %}
 
 That's all there is to it! Make your integration testing workflow faster and
-bug free with a touch of Docker. With a bit of effort it's a please!
+bug free with a touch of Docker. Takes a bit of effort, but at the end it makes
+for a really great developer experience.
 
 [docker-cache]: https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#build-cache
 [example]: https://github.com/bpicolo/postgres-docker-layer-cache-schemas
