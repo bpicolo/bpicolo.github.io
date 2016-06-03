@@ -15,21 +15,20 @@ The last thing you want to do to your test environment, however, is make tests s
 on. The longer it takes to run tests, the more likely you are to get just a bit
 lazy about what passes for acceptable testing.
 
-When creating my integration test suite, I hit a bit of pain waiting for schema
-files to run and create tables prior to running tests when booting up
-the Postgresql Docker container. If you have enough schemas to run, indexes, things
+When creating my integration test suite, I became increasingly annoyed waiting for schema
+files to run and create tables every time I started a test run. If you have enough schemas to run, indexes, things
 of that nature, it can be pretty painful to wait for prior to every test run.
 
-Luckily, Docker has a convenient way to solve this, the [Dockerfile Layer Cache][docker-cache].
-Every command run by a Dockerfile is cached into a new layer. If none of the files
+Luckily, Docker has a convenient way to solve this, the [Docker Layer Cache][docker-cache].
+Every command run by a Dockerfile is cached into a new 'layer'. If none of the files
 relevant to a command have changed (and none of the previous layers have changed)
 since your last docker build, it will skip rebuilding that layer.
 
 The trick, then, is to add schemas to the database while building your docker container.
-Then, the simple act of restarting your docker container gives you an entirely
+After that, just restarting your docker container gives you an entirely
 fresh copy of your database.
 
-Unfortunately, the default postgres container makes it a bit hard. If you take
+Unfortunately, the default postgres container makes this a bit difficult. If you take
 a look at the [postgres 9.5 dockerfile][default-dockerfile] you can see that it
 does all of it's database initializing logic on container startup, rather than
 in the docker commands. Luckily, it's easy to run that set of commands in the
@@ -40,7 +39,7 @@ found quite a few good reasons to definitely do it).
 use a migration tool for your database, or something similar, it should also be doable,
 you'll just have to add a few more dependencies to the postgres container.
 
-If we `docker-compose run postgres bash` and start up postgres. We can see that
+If we `docker-compose run postgres bash` and start up postgres, we can see that
 our schemas are ready for us.
 
 {% highlight bash %}
@@ -66,4 +65,4 @@ for a really great developer experience.
 
 [docker-cache]: https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#build-cache
 [example]: https://github.com/bpicolo/postgres-docker-layer-cache-schemas
-[default-dockerfile]: https://github.com/docker-library/postgres/blob/04b1d366d51a942b88fff6c62943f92c7c38d9b6/9.5/Dockerfile
+[default-dockerfile]: https://github.com/docker-library/postgres/blob/04b1d366d51a942b88fff6c62943f92c7c38d9b6/9.5/Dockerfile#L56
