@@ -3,6 +3,7 @@ layout: post
 title:  "Painlessly run Postgresql schemas in Docker for integration testing"
 date:   2016-06-01 14:52:52
 categories: docker testing
+comments: true
 ---
 Docker is a great way to help make your integration tests extremely consistent
 across all environments, whether they're running on your localhost or on a CI
