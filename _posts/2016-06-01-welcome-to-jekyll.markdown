@@ -42,11 +42,12 @@ use a migration tool for your database (or something similar) it should be doabl
 you'll just have to add a few more dependencies to the postgres container.
 
 The important parts:
+
 * We have our schemas enumerated in separated SQL files for running
-* We copied most of the [default entrypoint][[default-docker-init] to the postgres 9.5
+* We copied most of the [default entrypoint][default-docker-init] to the postgres 9.5
 container, put it in docker-init, and now run it as part of the docker build, rather
 than as an entrypoint.
-* We added a command to run all of the SQL files enumerated in the other directory, [add_schemas.sh][add-schemas].
+* We added a script that ingests all of the SQL files enumerated in the other directory, [add_schemas.sh][add-schemas].
 
 If we `docker-compose run postgres bash` and start up postgres, we can see that
 our schemas are ready for us.
